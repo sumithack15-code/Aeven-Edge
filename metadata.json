@@ -1,0 +1,6 @@
+{
+  "name": "ARVEN EDGE | Premium Unisex Salon",
+  "description": "ARVEN EDGE is a premium unisex salon offering elevated hair, beauty and grooming experiences.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
