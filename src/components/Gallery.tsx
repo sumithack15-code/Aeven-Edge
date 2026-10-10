@@ -55,7 +55,7 @@ export const Gallery: React.FC = () => {
 
   return (
     <section
-      id="gallery"
+      id="editorial-archive"
       className="py-24 md:py-36 bg-[#17181A] border-t border-[#2A2B2E]"
     >
       <div className="max-w-[1440px] mx-auto px-6 md:px-12">

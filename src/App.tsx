@@ -10,6 +10,7 @@ import { Hero } from "./components/Hero";
 import { About } from "./components/About";
 import { Services } from "./components/Services";
 import { Experience } from "./components/Experience";
+import { OurGallery } from "./components/OurGallery";
 import { Gallery } from "./components/Gallery";
 import { Testimonials } from "./components/Testimonials";
 import { InstagramSection } from "./components/InstagramSection";
@@ -58,6 +59,7 @@ export default function App() {
         <About />
         <Services onSelectService={handleSelectService} />
         <Experience />
+        <OurGallery />
         <Gallery />
         <Testimonials />
         <InstagramSection />
