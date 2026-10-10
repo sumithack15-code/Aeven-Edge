@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Sparkles } from "lucide-react";
+import { PUBLIC_IMAGE_FALLBACKS } from "../config/siteConfig";
 
 interface LuxuryImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   src: string;
@@ -12,9 +13,9 @@ interface LuxuryImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 
 /**
  * Resilient high-resolution image wrapper enforcing the Zero-Broken-Image Policy:
- * - Always includes referrerPolicy="no-referrer"
- * - Smooth fade-in upon load
- * - Styled architectural charcoal/champagne fallback if an image ever fails
+ * - Resolves bundled Vite asset URLs and automatically falls back to `/images/...` public static paths if needed
+ * - Includes loading skeleton state
+ * - Renders a styled architectural charcoal/champagne fallback card if all sources fail
  */
 export const LuxuryImage: React.FC<LuxuryImageProps> = ({
   src,
@@ -25,8 +26,27 @@ export const LuxuryImage: React.FC<LuxuryImageProps> = ({
   priority = false,
   ...rest
 }) => {
+  const [currentSrc, setCurrentSrc] = useState<string>(src);
+  const [triedPublicFallback, setTriedPublicFallback] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setCurrentSrc(src);
+    setTriedPublicFallback(false);
+    setHasError(false);
+    setIsLoaded(false);
+  }, [src]);
+
+  const handleError = () => {
+    const publicFallback = PUBLIC_IMAGE_FALLBACKS[src];
+    if (!triedPublicFallback && publicFallback && currentSrc !== publicFallback) {
+      setTriedPublicFallback(true);
+      setCurrentSrc(publicFallback);
+      return;
+    }
+    setHasError(true);
+  };
 
   return (
     <div
@@ -41,13 +61,13 @@ export const LuxuryImage: React.FC<LuxuryImageProps> = ({
             />
           )}
           <img
-            src={src}
+            src={currentSrc}
             alt={alt}
             referrerPolicy="no-referrer"
             loading={priority ? "eager" : "lazy"}
             decoding={priority ? "sync" : "async"}
             onLoad={() => setIsLoaded(true)}
-            onError={() => setHasError(true)}
+            onError={handleError}
             className={`w-full h-full object-cover transition-opacity duration-500 ${
               isLoaded ? "opacity-100" : "opacity-0"
             } ${imageClassName}`}

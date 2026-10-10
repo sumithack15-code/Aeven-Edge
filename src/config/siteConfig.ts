@@ -7,6 +7,13 @@
  * so nothing is fabricated and every value can be updated in one place.
  */
 
+import heroSalonImg from "../assets/images/hero_salon_interior_1791443957574.jpg";
+import aboutEditorialImg from "../assets/images/about_editorial_styling_1791443970067.jpg";
+import experienceRitualImg from "../assets/images/experience_signature_ritual_1791443980152.jpg";
+import bespokeGroomingImg from "../assets/images/gallery_bespoke_grooming_1791443991930.jpg";
+import radiantBeautyImg from "../assets/images/gallery_radiant_beauty_1791444001398.jpg";
+import architecturalDetailImg from "../assets/images/gallery_architectural_detail_1791444011569.jpg";
+
 export const INSTAGRAM_URL = "https://www.instagram.com/YOUR_HANDLE/";
 
 export const BOOKING_EXTERNAL_URL = ""; // Leave empty to use built-in luxury reservation desk UI, or insert external booking URL
@@ -57,13 +64,34 @@ export interface ServiceItem {
   image: string;
 }
 
+/**
+ * Primary Vite-bundled production image URLs with permanent /images/* public fallbacks.
+ */
 export const IMAGES = {
-  heroSalon: "/src/assets/images/hero_salon_interior_1791443957574.jpg",
-  aboutEditorial: "/src/assets/images/about_editorial_styling_1791443970067.jpg",
-  experienceRitual: "/src/assets/images/experience_signature_ritual_1791443980152.jpg",
-  bespokeGrooming: "/src/assets/images/gallery_bespoke_grooming_1791443991930.jpg",
-  radiantBeauty: "/src/assets/images/gallery_radiant_beauty_1791444001398.jpg",
-  architecturalDetail: "/src/assets/images/gallery_architectural_detail_1791444011569.jpg",
+  heroSalon: heroSalonImg || "/images/hero_salon_interior_1791443957574.jpg",
+  aboutEditorial:
+    aboutEditorialImg || "/images/about_editorial_styling_1791443970067.jpg",
+  experienceRitual:
+    experienceRitualImg || "/images/experience_signature_ritual_1791443980152.jpg",
+  bespokeGrooming:
+    bespokeGroomingImg || "/images/gallery_bespoke_grooming_1791443991930.jpg",
+  radiantBeauty:
+    radiantBeautyImg || "/images/gallery_radiant_beauty_1791444001398.jpg",
+  architecturalDetail:
+    architecturalDetailImg ||
+    "/images/gallery_architectural_detail_1791444011569.jpg",
+};
+
+export const PUBLIC_IMAGE_FALLBACKS: Record<string, string> = {
+  [IMAGES.heroSalon]: "/images/hero_salon_interior_1791443957574.jpg",
+  [IMAGES.aboutEditorial]: "/images/about_editorial_styling_1791443970067.jpg",
+  [IMAGES.experienceRitual]:
+    "/images/experience_signature_ritual_1791443980152.jpg",
+  [IMAGES.bespokeGrooming]:
+    "/images/gallery_bespoke_grooming_1791443991930.jpg",
+  [IMAGES.radiantBeauty]: "/images/gallery_radiant_beauty_1791444001398.jpg",
+  [IMAGES.architecturalDetail]:
+    "/images/gallery_architectural_detail_1791444011569.jpg",
 };
 
 export const SERVICES_DATA: ServiceItem[] = [
